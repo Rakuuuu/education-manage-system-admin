@@ -55,10 +55,14 @@
       </el-col>
     </el-row>
     <el-row class="echarts-line">
-      <div id="echarts-moth-user" style="width: 100%;height:400px;" v-loading="loading"/>
+      <el-col>
+        <div id="echarts-moth-user" style="width: 100%;height:400px;" v-loading="loading"/>
+      </el-col>
     </el-row>
     <el-row class="echarts-line">
-      <div id="echarts-moth-question" style="width: 100%;height:400px;" v-loading="loading"/>
+      <el-col>
+        <div id="echarts-moth-question" style="width: 100%;height:400px;" v-loading="loading"/>
+      </el-col>
     </el-row>
   </div>
 </template>
@@ -198,6 +202,7 @@ export default {
       color: #666;
       background: #fff;
       box-shadow: 4px 4px 40px rgba(0, 0, 0, .05);
+      border-radius: 10px;
       border-color: rgba(0, 0, 0, .05);
 
       &:hover {
@@ -294,5 +299,6 @@ export default {
     background:#fff;
     padding:16px 16px 0;
     margin-bottom:32px;
+    border-radius: 10px;
   }
 </style>

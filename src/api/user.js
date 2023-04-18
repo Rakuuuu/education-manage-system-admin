@@ -1,4 +1,4 @@
-import { post } from '@/utils/request'
+import { get, post } from '@/utils/request'
 
 export default {
   getUserPageList: query => post('/api/admin/user/page/list', query),
@@ -9,5 +9,7 @@ export default {
   updateUser: query => post('/api/admin/user/update', query),
   changeStatus: id => post('/api/admin/user/changeStatus/' + id),
   deleteUser: id => post('/api/admin/user/delete/' + id),
-  selectByUserName: query => post('/api/admin/user/selectByUserName', query)
+  selectByUserName: query => post('/api/admin/user/selectByUserName', query),
+  createRecord: query => post('/api/admin/record/createrecord', query),
+  getAllRecord: query => post('/api/admin/record/getallrecord', query)
 }
