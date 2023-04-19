@@ -62,40 +62,18 @@ export default {
       studentList: [],
       currentStatus: false, // 当前是否开启签到
       code: null,
-      timer: 0,
       echartsSignRate: null,
-      chartOption: {
-        tooltip: {
-          trigger: 'item'
-        },
-        legend: {
-          left: 'center'
-        },
-        series: [
-          {
-            name: '到课率',
-            type: 'pie',
-            radius: ['30%', '70%'],
-            avoidLabelOverlap: false,
-            itemStyle: {
-              borderRadius: 5,
-              borderWidth: 0
-            },
-            label: {
-              show: false,
-              position: 'center'
-            },
-            labelLine: {
-              show: false
-            },
-            data: [
-              { value: 1048, name: '到课' },
-              { value: 735, name: '缺勤' }
-            ]
-          }
-        ]
-      }
+      userData: {}
     }
+  },
+  created () {
+    userApi.getCurrentUser().then(res => {
+      console.log(res)
+      if (res.response)
+        this.userData = res.response
+      else
+        this.$message.warning('发生错误')
+    })
   },
   mounted () {
     this.echartsSignRate = echarts.init(document.getElementById('echarts-rate'), 'macarons')
@@ -110,18 +88,15 @@ export default {
         this.currentStatus = true
         this.code = res.token
         this.getAllRecord()
-      } else if(res.isAllowed === false){
+      } else if (res.isAllowed === false) {
         this.$message.info('当前未开启签到')
       }
     })
   },
-  computed:{
-    signInRate(){
+  computed: {
+    signInRate () {
       return (this.studentList.reduce((prV, curV) => {
-        if(curV.statues === 'TRUE')
-          return prV + 1
-        else
-          return prV
+        if (curV.statues === 'TRUE') { return prV + 1 } else { return prV }
       }, 0.0) / this.studentList.length)
     }
   },
@@ -129,7 +104,7 @@ export default {
     startSignIn () {
       userApi.createRecord({
         courseId: 123456,
-        teacherId: 2
+        teacherId: this.userData.id
       }).then(res => {
         if (typeof res === 'number') {
           this.code = res
@@ -153,7 +128,7 @@ export default {
     getAllRecord () {
       userApi.getAllRecord({ flag: false }).then(res => {
         console.log(res)
-        if(res.isAllowed) { // 若处于开放签到状态则轮询
+        if (res.isAllowed) { // 若处于开放签到状态则轮询
           this.studentList = res.list
           this.currentStatus = true
           this.code = res.token
@@ -177,6 +152,7 @@ export default {
           top: '5%',
           left: 'center'
         },
+        color:['#79ef71','#ff6363'],
         series: [
           {
             name: '到课率',
