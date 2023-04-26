@@ -190,6 +190,12 @@ const constantRoutes = [
         component: () => import('@/views/education/sign-in/index'),
         name: 'EducationSignPage',
         meta: { title: '学生考勤', noCache: true, activeMenu: '/education/sign' }
+      },
+      {
+        path: 'live',
+        component: () => import('@/views/education/live/index'),
+        name: 'EducationLivePage',
+        meta: { title: '在线课堂', noCache: true, activeMenu: '/education/live' }
       }
     ]
   },
