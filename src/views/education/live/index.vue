@@ -146,7 +146,7 @@ export default {
       lang: 'zh-cn'
     })
 
-    this.socket = io('ws://localhost:3000')
+    this.socket = io('ws://8.130.19.2:3000')
     this.socket.on('connect', () => {
       console.log('connect！')
     })
