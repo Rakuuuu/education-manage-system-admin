@@ -12,13 +12,17 @@ module.exports = {
   productionSourceMap: false,
   devServer: {
     open: true,
-    host: 'localhost',
     port: 8002,
     https: false,
     hotOnly: false,
     proxy: {
       '/api': {
         target: 'http://8.130.19.2:8000',
+        changeOrigin: true
+      },
+      '/socket.io': {
+        target: 'http://8.130.19.2:3000',
+        ws: true,
         changeOrigin: true
       }
     }

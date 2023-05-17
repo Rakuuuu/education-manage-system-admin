@@ -146,7 +146,10 @@ export default {
       lang: 'zh-cn'
     })
 
-    this.socket = io('ws://8.130.19.2:3000')
+    this.socket = io({
+      path: '/socket.io',
+      transports: ['websocket']
+    })
     this.socket.on('connect', () => {
       console.log('connect！')
     })
